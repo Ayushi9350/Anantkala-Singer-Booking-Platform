@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}About Us — Anantkala{% endblock %}
+
+{% block content %}
+
+<div style="padding: 160px 60px 80px; text-align:center; background: linear-gradient(180deg, var(--dark-2) 0%, var(--black) 100%); border-bottom:1px solid rgba(212,175,55,0.1);">
+  <span class="section-tag">✦ Our Story ✦</span>
+  <h1 style="font-family:var(--font-display); font-size: clamp(40px, 5vw, 64px); color:var(--gold); margin-bottom:16px;">About Anantkala</h1>
+  <div class="section-divider"></div>
+</div>
+
+<section class="section">
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Born from a Love of Music</h2>
+      <p>
+        Anantkala — meaning <em>"Eternal Art"</em> — was founded with a singular vision: to bridge the gap between extraordinary musical talent and the events that deserve it most.
+      </p>
+      <p>
+        We believe that every celebration, every gathering, every moment deserves to be elevated by the power of live music. Our platform carefully curates India's finest voices — from classical maestros to contemporary Bollywood artists.
+      </p>
+      <p>
+        Whether it's an intimate wedding, a grand corporate gala, or a cultural celebration, Anantkala connects you with singers who don't just perform — they transform.
+      </p>
+      <div style="margin-top:40px; display:flex; flex-direction:column; gap:16px;">
+        {% for item in "123"|make_list %}
+        <div style="display:flex; align-items:center; gap:16px;">
+          <div style="width:32px; height:32px; border:1px solid var(--gold); display:flex; align-items:center; justify-content:center; color:var(--gold); flex-shrink:0; font-family:var(--font-heading); font-size:12px;">✦</div>
+          {% if forloop.counter == 1 %}
+          <p style="color:var(--white-dim); font-style:italic; margin:0;">Verified & auditioned artists only</p>
+          {% elif forloop.counter == 2 %}
+          <p style="color:var(--white-dim); font-style:italic; margin:0;">Transparent pricing, no hidden charges</p>
+          {% else %}
+          <p style="color:var(--white-dim); font-style:italic; margin:0;">Dedicated support from booking to performance</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-circle">
+        <div class="about-icon">🎵</div>
+      </div>
+      <div style="position:absolute; top:20px; right:20px; width:120px; height:120px; border:1px solid rgba(212,175,55,0.2); border-radius:50%;"></div>
+      <div style="position:absolute; bottom:40px; left:10px; width:80px; height:80px; border:1px solid rgba(212,175,55,0.15); border-radius:50%;"></div>
+      <div style="position:absolute; top:50%; right:0; transform:translateY(-50%);">
+        <div style="font-family:var(--font-display); font-size:80px; color:var(--gold); opacity:0.06; writing-mode:vertical-rl;">MUSIC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM / MISSION -->
+<section style="background:var(--dark-2); padding:100px 60px; border-top:1px solid rgba(212,175,55,0.1);">
+  <div style="max-width:800px; margin:0 auto; text-align:center;">
+    <span class="section-tag">✦ Our Mission ✦</span>
+    <h2 class="section-title" style="margin-bottom:30px;">Making Every Event <span>Extraordinary</span></h2>
+    <div class="section-divider"></div>
+    <p style="font-size:22px; font-style:italic; color:var(--white-dim); line-height:2; margin-top:30px;">
+      "Music is the shorthand of emotion. At Anantkala, we are passionate about connecting the right voice to the right moment — creating memories that echo long after the last note fades."
+    </p>
+    <div style="margin-top:40px; font-family:var(--font-heading); font-size:13px; letter-spacing:3px; color:var(--gold);">— The Anantkala Team</div>
+  </div>
+</section>
+
+{% endblock %}

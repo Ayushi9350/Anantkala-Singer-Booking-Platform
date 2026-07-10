@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Book {{ singer.name }} — Anantkala{% endblock %}
+
+{% block content %}
+
+<div class="booking-container">
+  <!-- SINGER HEADER -->
+  <div class="booking-singer-header">
+    <img src="{{ singer.photo.url }}" alt="{{ singer.name }}" class="booking-singer-photo">
+    <div>
+      <p style="font-family:var(--font-heading); font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:6px;">
+        ✦ Booking Request
+      </p>
+      <h2 style="font-family:var(--font-display); font-size:28px; color:var(--white); margin-bottom:6px;">{{ singer.name }}</h2>
+      <p style="color:var(--white-dim); font-style:italic;">Starting ₹{{ singer.price_per_event|floatformat:0 }} per event</p>
+    </div>
+  </div>
+
+  <div class="section-divider" style="margin:0 0 40px;"></div>
+  
+  <h3 style="font-family:var(--font-heading); font-size:16px; letter-spacing:2px; color:var(--gold); margin-bottom:30px; text-transform:uppercase;">Event Details</h3>
+
+  <form method="post">
+    {% csrf_token %}
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+      <div class="form-group">
+        <label>Event Name</label>
+        {{ form.event_name }}
+      </div>
+      <div class="form-group">
+        <label>Type of Event</label>
+        {{ form.event_type }}
+      </div>
+      <div class="form-group">
+        <label>Event Date</label>
+        {{ form.event_date }}
+      </div>
+      <div class="form-group">
+        <label>Event Time</label>
+        {{ form.event_time }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Venue / Location</label>
+      {{ form.event_location }}
+    </div>
+
+    <div class="form-group">
+      <label>Expected Number of Guests</label>
+      {{ form.guests_count }}
+    </div>
+
+    <div class="form-group">
+      <label>Special Requests</label>
+      {{ form.special_requests }}
+    </div>
+
+    <!-- PRICE DISPLAY -->
+    <div style="padding:20px; background:rgba(212,175,55,0.05); border:1px solid rgba(212,175,55,0.2); margin-bottom:30px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-family:var(--font-heading); font-size:13px; letter-spacing:1px; color:var(--white-dim);">Estimated Amount:</span>
+        <span style="font-family:var(--font-display); font-size:24px; color:var(--gold);">₹{{ singer.price_per_event|floatformat:0 }}</span>
+      </div>
+      <p style="font-size:14px; color:rgba(245,240,232,0.4); font-style:italic; margin-top:8px;">Final amount may vary based on event requirements. Our team will confirm.</p>
+    </div>
+
+    <button type="submit" class="btn-gold" style="width:100%; border:none; cursor:pointer; font-size:14px;">
+      Submit Booking Request ✦
+    </button>
+  </form>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    let today = new Date();
+
+    // block today + tomorrow
+    today.setDate(today.getDate() + 2);
+
+    let minDate = today.toISOString().split('T')[0];
+
+    let dateInput = document.querySelector(
+        'input[type="date"]'
+    );
+
+    if (dateInput) {
+
+        dateInput.setAttribute(
+            'min',
+            minDate
+        );
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

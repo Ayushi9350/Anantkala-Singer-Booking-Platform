@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ singer.name }} — Anantkala{% endblock %}
+
+{% block content %}
+
+<!-- SINGER DETAIL HERO -->
+<div class="singer-detail-hero">
+  <div class="singer-detail-img-wrap">
+    <img src="{{ singer.photo.url }}" alt="{{ singer.name }}" class="singer-detail-img">
+  </div>
+
+  <div class="singer-detail-info">
+
+    {% if singer.genre %}
+    <p class="singer-detail-genre">✦ {{ singer.genre.name }} ✦</p>
+    {% endif %}
+
+    <h1 class="singer-detail-name">{{ singer.name }}</h1>
+
+    <div style="width:60px; height:1px; background:var(--gold); margin-bottom:28px;"></div>
+
+    <p class="singer-detail-bio">{{ singer.bio }}</p>
+
+    <div class="singer-meta-grid">
+
+      <div class="singer-meta-item">
+        <p class="singer-meta-label">Experience</p>
+        <p class="singer-meta-value">{{ singer.experience_years }} Years</p>
+      </div>
+
+      <div class="singer-meta-item">
+        <p class="singer-meta-label">Starting Price</p>
+        <p class="singer-meta-value">₹{{ singer.price_per_event|floatformat:0 }}</p>
+      </div>
+
+      <div class="singer-meta-item">
+        <p class="singer-meta-label">Availability</p>
+        <p class="singer-meta-value"
+           style="color:{% if singer.is_available %}#4caf50{% else %}#f44336{% endif %};">
+          {% if singer.is_available %}
+            Available
+          {% else %}
+            Booked
+          {% endif %}
+        </p>
+      </div>
+
+      {% if singer.genre %}
+      <div class="singer-meta-item">
+        <p class="singer-meta-label">Genre</p>
+        <p class="singer-meta-value">{{ singer.genre.name }}</p>
+      </div>
+      {% endif %}
+
+    </div>
+
+    <!-- Social Links -->
+    {% if singer.instagram or singer.youtube %}
+    <div style="display:flex; gap:12px; margin-bottom:30px;">
+
+      {% if singer.instagram %}
+      <a href="{{ singer.instagram }}"
+         target="_blank"
+         style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:10px 20px; border:1px solid rgba(212,175,55,0.3); color:var(--gold); text-decoration:none; transition:all 0.3s;"
+         onmouseenter="this.style.background='rgba(212,175,55,0.1)'"
+         onmouseleave="this.style.background='transparent'">
+        📷 Instagram
+      </a>
+      {% endif %}
+
+      {% if singer.youtube %}
+      <a href="{{ singer.youtube }}"
+         target="_blank"
+         style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:10px 20px; border:1px solid rgba(212,175,55,0.3); color:var(--gold); text-decoration:none; transition:all 0.3s;"
+         onmouseenter="this.style.background='rgba(212,175,55,0.1)'"
+         onmouseleave="this.style.background='transparent'">
+        ▶ YouTube
+      </a>
+      {% endif %}
+
+    </div>
+    {% endif %}
+
+    <!-- LIKE BUTTON -->
+    <div style="margin-bottom:25px;">
+
+      {% if user.is_authenticated %}
+
+      <form method="POST" action="{% url 'toggle_like' singer.pk %}">
+        {% csrf_token %}
+
+        <button type="submit"
+          style="
+            background:none;
+            border:1px solid rgba(212,175,55,0.4);
+            color:var(--gold);
+            padding:10px 20px;
+            border-radius:30px;
+            cursor:pointer;
+            font-size:16px;
+          ">
+
+          {% if is_liked %}
+            ❤️ Liked
+          {% else %}
+            🤍 Like
+          {% endif %}
+
+        </button>
+      </form>
+
+      {% endif %}
+
+      <p style="margin-top:10px;color:var(--white-dim);font-size:15px;">
+        ❤️ {{ likes_count }} Likes
+      </p>
+
+    </div>
+
+    <!-- BOOK BUTTON -->
+    {% if singer.is_available %}
+
+      {% if user.is_authenticated %}
+      <a href="{% url 'book_singer' singer.pk %}"
+         class="btn-gold"
+         style="display:inline-block;">
+        Book {{ singer.name }}
+      </a>
+      {% else %}
+      <a href="{% url 'account_login' %}"
+         class="btn-gold"
+         style="display:inline-block;">
+        Login to Book
+      </a>
+      {% endif %}
+
+    {% else %}
+
+    <div style="font-family:var(--font-heading); font-size:13px; letter-spacing:2px; color:#f44336; border:1px solid #f44336; padding:14px 32px; display:inline-block;">
+      Currently Unavailable
+    </div>
+
+    {% endif %}
+
+  </div>
+</div>
+
+<!-- GALLERY -->
+{% if gallery %}
+<section style="padding:80px 60px; background:var(--dark-2);">
+
+  <div class="section-header">
+    <span class="section-tag">✦ Gallery ✦</span>
+    <h2 class="section-title">{{ singer.name }}'s <span>Gallery</span></h2>
+    <div class="section-divider"></div>
+  </div>
+
+  <div class="gallery-grid" style="max-width:1200px; margin:0 auto;">
+    {% for img in gallery %}
+    <div class="gallery-item">
+      <img src="{{ img.image.url }}"
+           alt="{{ img.caption|default:singer.name }}">
+    </div>
+    {% endfor %}
+  </div>
+
+</section>
+{% endif %}
+
+<!-- BACK BUTTON -->
+<div style="padding:60px; text-align:center; background:var(--black);">
+  <a href="{% url 'singer_list' %}" class="btn-outline">
+    ← Back to All Singers
+  </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}Singer Registration — Anantkala{% endblock %}
+
+{% block content %}
+
+<div class="booking-container">
+
+    <h2 style="
+        font-family:var(--font-display);
+        font-size:32px;
+        color:var(--gold);
+        margin-bottom:30px;
+        text-align:center;
+    ">
+        Singer Registration
+    </h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div style="
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:20px;
+        ">
+
+            <div class="form-group">
+                <label>Username</label>
+                {{ form.username }}
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                {{ form.password }}
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label>Photo</label>
+                {{ form.photo }}
+            </div>
+
+            <div class="form-group">
+                <label>Genre</label>
+                {{ form.genre }}
+            </div>
+
+            <div class="form-group">
+                <label>Experience Years</label>
+                {{ form.experience_years }}
+            </div>
+
+            <div class="form-group">
+                <label>Price Per Event</label>
+                {{ form.price_per_event }}
+            </div>
+
+            <div class="form-group">
+                <label>Contact Email</label>
+                {{ form.contact_email }}
+            </div>
+
+            <div class="form-group">
+                <label>Contact Phone</label>
+                {{ form.contact_phone }}
+            </div>
+
+            <div class="form-group">
+                <label>Instagram</label>
+                {{ form.instagram }}
+            </div>
+
+            <div class="form-group">
+                <label>YouTube</label>
+                {{ form.youtube }}
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label>Bio</label>
+            {{ form.bio }}
+        </div>
+
+        <button
+            type="submit"
+            class="btn-gold"
+            style="
+                width:100%;
+                border:none;
+                cursor:pointer;
+                margin-top:20px;
+            "
+        >
+            Send Registration Request
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

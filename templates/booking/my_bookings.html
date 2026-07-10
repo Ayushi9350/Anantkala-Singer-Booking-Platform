@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}My Bookings — Anantkala{% endblock %}
+
+{% block content %}
+
+<div style="padding: 160px 60px 40px; text-align:center; background: linear-gradient(180deg, var(--dark-2) 0%, var(--black) 100%); border-bottom:1px solid rgba(212,175,55,0.1);">
+  <span class="section-tag">✦ Your Events ✦</span>
+  <h1 style="font-family:var(--font-display); font-size: clamp(36px, 4vw, 52px); color:var(--white); margin-bottom:16px;">My <span style="color:var(--gold);">Bookings</span></h1>
+  <div class="section-divider"></div>
+</div>
+
+<div class="bookings-container">
+  {% if bookings %}
+    {% for booking in bookings %}
+    <div class="booking-card">
+      <div>
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+          <img src="{{ booking.singer.photo.url }}" alt="{{ booking.singer.name }}" 
+               style="width:50px; height:50px; object-fit:cover; border-radius:50%; border:2px solid var(--gold);">
+          <div>
+            <p style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-bottom:3px;">{{ booking.singer.name }}</p>
+            <h3 style="font-family:var(--font-heading); font-size:18px; color:var(--white);">{{ booking.event_name }}</h3>
+          </div>
+        </div>
+        <div style="display:flex; gap:30px; flex-wrap:wrap;">
+          <div>
+            <p style="font-family:var(--font-heading); font-size:10px; letter-spacing:2px; color:rgba(245,240,232,0.4); text-transform:uppercase;">Date</p>
+            <p style="color:var(--white-dim); font-size:16px;">{{ booking.event_date }}</p>
+          </div>
+          <div>
+            <p style="font-family:var(--font-heading); font-size:10px; letter-spacing:2px; color:rgba(245,240,232,0.4); text-transform:uppercase;">Venue</p>
+            <p style="color:var(--white-dim); font-size:16px;">{{ booking.event_location }}</p>
+          </div>
+          {% if booking.total_amount %}
+          <div>
+            <p style="font-family:var(--font-heading); font-size:10px; letter-spacing:2px; color:rgba(245,240,232,0.4); text-transform:uppercase;">Amount</p>
+            <p style="color:var(--gold); font-size:16px;">₹{{ booking.total_amount|floatformat:0 }}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      <div>
+
+    <span class="status-badge status-{{ booking.status }}">
+        {{ booking.get_status_display }}
+    </span>
+
+    {% if booking.status == 'pending' %}
+    <div style="margin-top:12px;">
+        <a href="{% url 'cancel_booking' booking.id %}"
+           style="
+              display:inline-block;
+              padding:8px 15px;
+              background:#dc3545;
+              color:white;
+              text-decoration:none;
+              border-radius:6px;
+              font-size:14px;
+           ">
+            ❌ Cancel Booking
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+    </div>
+    {% endfor %}
+  {% else %}
+  <div style="text-align:center; padding:100px 40px; opacity:0.6;">
+    <div style="font-size:60px; margin-bottom:24px;">🎵</div>
+    <p style="font-style:italic; font-size:22px; color:var(--white-dim); margin-bottom:30px;">No bookings yet. Discover our singers and book your perfect performance!</p>
+    <a href="{% url 'singer_list' %}" class="btn-gold">Explore Singers</a>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}

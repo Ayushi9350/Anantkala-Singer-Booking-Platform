@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="max-width:900px;margin:60px auto;padding:20px;">
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;">
+
+        <h2 style="color:gold;">Welcome, {{ singer.name }}</h2>
+
+        <div>
+
+            <a href="{% url 'edit_singer_profile' %}"
+               style="padding:8px 20px;border:1px solid gold;color:gold;border-radius:5px;text-decoration:none;margin-right:10px;">
+                ✏️ Edit My Profile
+            </a>
+
+            <a href="{% url 'singer_logout' %}"
+               style="padding:8px 20px;border:1px solid red;color:red;border-radius:5px;text-decoration:none;">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <h3 style="color:white;margin-bottom:20px;">Booking Requests</h3>
+
+    {% for booking in bookings %}
+    <div style="background:#1a1a2e;border:1px solid gold;border-radius:10px;padding:20px;margin-bottom:15px;">
+
+        <p style="color:white;"><b style="color:gold;">User:</b> {{ booking.user.username }}</p>
+        <p style="color:white;"><b style="color:gold;">Event:</b> {{ booking.event_name }}</p>
+        <p style="color:white;"><b style="color:gold;">Type:</b> {{ booking.event_type }}</p>
+        <p style="color:white;"><b style="color:gold;">Date:</b> {{ booking.event_date }}</p>
+        <p style="color:white;"><b style="color:gold;">Location:</b> {{ booking.event_location }}</p>
+        <p style="color:white;"><b style="color:gold;">Guests:</b> {{ booking.guests_count }}</p>
+
+        <p style="color:white;">
+            <b style="color:gold;">Status:</b>
+
+            {% if booking.status == 'pending' %}
+                <span style="color:orange;">⏳ Pending</span>
+            {% elif booking.status == 'confirmed' %}
+                <span style="color:green;">✅ Confirmed</span>
+            {% elif booking.status == 'cancelled' %}
+                <span style="color:red;">❌ Cancelled</span>
+            {% endif %}
+        </p>
+
+        {% if booking.status == 'pending' %}
+        <form method="POST" action="{% url 'update_booking_status' booking.id %}" style="margin-top:10px;">
+            {% csrf_token %}
+
+            <button name="action" value="accept"
+                style="padding:8px 20px;background:green;color:white;border:none;border-radius:5px;cursor:pointer;margin-right:10px;">
+                ✅ Accept
+            </button>
+
+            <button name="action" value="reject"
+                style="padding:8px 20px;background:red;color:white;border:none;border-radius:5px;cursor:pointer;">
+                ❌ Reject
+            </button>
+
+        </form>
+        {% endif %}
+
+    </div>
+
+    {% empty %}
+        <p style="color:grey;text-align:center;">No booking requests yet.</p>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

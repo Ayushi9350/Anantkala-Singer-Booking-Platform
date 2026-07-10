@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Gallery{% endblock %}
+
+{% block content %}
+
+<section class="singers-section">
+    <div class="container">
+
+        <h1 class="section-title">Video Gallery</h1>
+
+        <div class="video-grid">
+
+            {% for video in videos %}
+            <div class="video-card">
+
+                <video autoplay muted loop playsinline >
+                    <source 
+                src="{{ video.video.url }}" 
+                type="video/mp4">
+                </video>
+
+                <h5>{{ video.title }}</h5>
+
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll("video").forEach(video => {
+        video.muted = true;
+        video.play().catch(err => console.log(err));
+    });
+});
+</script>
+{% endblock %}

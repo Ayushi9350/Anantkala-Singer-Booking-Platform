@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Singers — Anantkala{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+<div style="background: linear-gradient(180deg, var(--dark-2) 0%, var(--black) 100%); padding: 160px 60px 80px; text-align:center; border-bottom: 1px solid rgba(212,175,55,0.1);">
+  <span class="section-tag">✦ Our Artists ✦</span>
+  <h1 style="font-family:var(--font-display); font-size: clamp(40px, 5vw, 64px); color:var(--white); margin-bottom:16px;">
+    Discover <span style="color:var(--gold);">Voices</span>
+  </h1>
+  <div class="section-divider"></div>
+  <p style="font-style:italic; color:var(--white-dim); font-size:19px;">
+    India's finest singers, ready to make your event unforgettable
+  </p>
+</div>
+
+<!-- GENRE FILTER -->
+<div style="background:var(--dark-2); padding:24px 60px; border-bottom:1px solid rgba(212,175,55,0.1); display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
+  <span style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; color:var(--gold); text-transform:uppercase; margin-right:12px;">Filter:</span>
+  <a href="{% url 'singer_list' %}" 
+     style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 20px; border:1px solid; text-decoration:none; transition:all 0.3s; {% if not selected_genre %}border-color:var(--gold); color:var(--black); background:var(--gold);{% else %}border-color:rgba(212,175,55,0.3); color:var(--white-dim);{% endif %}">
+    All
+  </a>
+  {% for genre in genres %}
+  <a href="{% url 'singer_list' %}?genre={{ genre.id }}" 
+     style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; text-transform:uppercase; padding:8px 20px; border:1px solid; text-decoration:none; transition:all 0.3s; {% if selected_genre == genre.id|stringformat:'s' %}border-color:var(--gold); color:var(--black); background:var(--gold);{% else %}border-color:rgba(212,175,55,0.3); color:var(--white-dim);{% endif %}">
+    {{ genre.name }}
+  </a>
+  {% endfor %}
+</div>
+
+<!-- SINGERS GRID -->
+<section class="section">
+  {% if singers %}
+  <div class="singers-grid">
+    {% for singer in singers %}
+    <a href="{% url 'singer_detail' singer.pk %}" class="singer-card">
+      {% if singer.featured %}
+      <div class="singer-badge">Featured</div>
+      {% endif %}
+      <img src="{{ singer.photo.url }}" alt="{{ singer.name }}" class="singer-card-img">
+      <div class="singer-card-overlay"></div>
+      <div class="singer-card-info">
+        {% if singer.genre %}
+        <p class="singer-card-genre">{{ singer.genre.name }}</p>
+        {% endif %}
+        <h3 class="singer-card-name">{{ singer.name }}</h3>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;">
+
+    <p class="singer-card-price" style="margin:0;">
+        ₹{{ singer.price_per_event|floatformat:0 }} / event · {{ singer.experience_years }} yrs exp
+    </p>
+
+    <div style="text-align:center;line-height:1;">
+        <div style="font-size:18px;">⭐</div>
+        <div style="font-size:12px;color:#d4af37;">
+            {{ singer.likes.count }}
+        </div>
+    </div>
+
+</div>        
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div style="text-align:center; padding:80px; opacity:0.5;">
+    <div style="font-size:60px; margin-bottom:20px;">🎵</div>
+    <p style="font-style:italic; font-size:22px; color:var(--white-dim);">No singers found. Add singers from the admin panel.</p>
+  </div>
+  {% endif %}
+</section>
+
+{% endblock %}

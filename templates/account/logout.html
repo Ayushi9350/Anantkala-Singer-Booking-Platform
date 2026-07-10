@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout — Anantkala</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-box" style="animation: fadeInUp 0.8s ease both;">
+      <div class="login-logo">A</div>
+      <h1 style="font-family:var(--font-display); font-size:28px; color:var(--gold); margin-bottom:24px;">Sign Out?</h1>
+      <p style="color:var(--white-dim); font-style:italic; margin-bottom:36px;">Are you sure you want to leave Anantkala?</p>
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn-google" style="margin-bottom:16px;">Yes, Sign Out</button>
+      </form>
+      <a href="{% url 'home' %}" style="font-family:var(--font-heading); font-size:11px; letter-spacing:2px; color:var(--gold); text-decoration:none;">← Stay on Anantkala</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,513 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Anantkala — Discover India's Finest Voices{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+      <source src="{% static 'videos/anantkala.mp4' %}" type="video/mp4">
+  </video>
+
+  <div class="mobile-slider">
+      <img src="{% static 'images/slide1.jpg.jpeg' %}" class="slide active">
+      <img src="{% static 'images/slide2.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide3.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide4.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide5.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide6.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide7.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide8.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide9.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide10.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide11.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide12.jpg.jpeg' %}" class="slide">
+      <img src="{% static 'images/slide13.jpg.jpeg' %}" class="slide">
+  </div>
+
+  <div class="hero-overlay"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-particles"></div>
+
+  <div style="position:relative; z-index:3; max-width:900px; margin:auto; text-align:center;">
+    <p class="hero-ornament">✦ Premium Singer Management Platform ✦</p>
+    <h1 class="hero-title">Anantkala</h1>
+    <p class="hero-subtitle">Where Music Meets the Eternal</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Connect with India's most gifted voices. From soulful classical ragas to electrifying Bollywood performances — curated exclusively for unforgettable events.
+    </p>
+    <div class="hero-btns">
+      <a href="{% url 'singer_list' %}" class="btn-gold">Explore Singers</a>
+      {% if not user.is_authenticated %}
+        <a href="{% url 'account_login' %}" class="btn-outline">Book Now</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">
+    <div class="stat-number">{{ total_singers }}+</div>
+    <div class="stat-label">Talented Singers</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">500+</div>
+    <div class="stat-label">Events Performed</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">15+</div>
+    <div class="stat-label">Music Genres</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">100%</div>
+    <div class="stat-label">Satisfaction</div>
+  </div>
+</div>
+
+<!-- ===== FAMOUS SINGER STYLES ===== -->
+<style>
+  /* ---------- Section wrapper ---------- */
+  .fs-section {
+    background: #0a0a0a;
+    padding: 80px 0 60px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+  }
+
+  /* ---------- Section heading ---------- */
+  .fs-heading-wrap {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .fs-heading {
+    display: inline-block;
+    position: relative;
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 2.6rem;
+    font-weight: 700;
+    letter-spacing: normal;
+    text-transform: uppercase;
+    color: #fff;
+    padding-bottom: 18px;
+  }
+
+  .fs-heading .gold-letter {
+    color: #d4af37;
+  }
+
+  .fs-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, transparent, #d4af37, #ffe066, #d4af37, transparent);
+    animation: goldLine 3s ease-in-out infinite;
+    border-radius: 2px;
+    box-shadow: 0 0 8px rgba(212,175,55,0.6);
+  }
+
+  @keyframes goldLine {
+    0%   { width: 0%;   opacity: 0.3; }
+    50%  { width: 100%; opacity: 1;   }
+    100% { width: 0%;   opacity: 0.3; }
+  }
+
+  /* ---------- Singer Card ---------- */
+  .fs-card {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto 48px auto;
+    max-width: 1100px;
+    border: 1px solid rgba(212,175,55,0.18);
+    overflow: hidden;
+    transition: border-color 0.4s, box-shadow 0.4s;
+  }
+
+  .fs-card:hover {
+    border-color: rgba(212,175,55,0.55);
+    box-shadow: 0 0 40px rgba(212,175,55,0.12);
+  }
+
+  /* Image half */
+  .fs-img-wrap {
+    flex: 0 0 50%;
+    max-width: 50%;
+    overflow: hidden;
+    position: relative;
+    height:auto;
+  }
+
+  .fs-img-wrap img {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .fs-card:hover .fs-img-wrap img {
+    transform: scale(1.04);
+  }
+
+  /* Gold overlay shimmer on image */
+  .fs-img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Text half */
+  .fs-info {
+    flex: 0 0 50%;
+    max-width: 50%;
+    background: #111;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-left: 1px solid rgba(212,175,55,0.12);
+    position: relative;
+  }
+
+  /* Vertical gold accent bar */
+  .fs-info::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;
+    height: 60%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, #d4af37, transparent);
+    opacity: 0.5;
+  }
+
+  .fs-info h2 {
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .fs-info .gold-rule {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, #d4af37, #ffe066);
+    margin: 12px 0 18px 0;
+    border-radius: 1px;
+  }
+
+  .fs-info p.bio {
+    font-size: 0.93rem;
+    color: #bbb;
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .fs-info p.bio strong {
+    color: #e8c84a;
+  }
+
+  .fs-info .albums-title {
+    font-family: 'Cinzel', 'Georgia', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #d4af37;
+    margin-bottom: 10px;
+  }
+
+  .fs-albums {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+  }
+
+  .fs-albums li {
+    margin-bottom: 6px;
+  }
+
+  .fs-albums li a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s;
+  }
+
+  .fs-albums li a:hover {
+    color: #d4af37;
+  }
+
+  .fs-social {
+    font-size: 0.85rem;
+    color: #888;
+    line-height: 2;
+    border-top: 1px solid rgba(212,175,55,0.12);
+    padding-top: 16px;
+    margin-top: auto;
+  }
+
+  .fs-social a {
+    color: #d4af37;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .fs-social a:hover {
+    color: #ffe066;
+    text-decoration: underline;
+  }
+
+  /* Reverse layout */
+  .fs-card.reverse .fs-img-wrap { order: 2; }
+  .fs-card.reverse .fs-info     { order: 1; border-left: none; border-right: 1px solid rgba(212,175,55,0.12); }
+  .fs-card.reverse .fs-info::before { left: auto; right: 0; }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .fs-card, .fs-card.reverse {
+      flex-direction: column;
+      min-height: unset;
+    }
+    .fs-img-wrap, .fs-info {
+      flex: unset;
+      max-width: 100%;
+      width: 100%;
+    }
+    .fs-card .fs-img-wrap  { height: auto; order: 1 !important; }
+    .fs-card .fs-info      { order: 2 !important; padding: 30px 22px; border-left: none !important; border-right: none !important; border-top: 1px solid rgba(212,175,55,0.15); }
+    .fs-info::before       { display: none; }
+    .fs-heading            { font-size: 2.2rem; letter-spacing: 0; }
+  }
+</style>
+
+<!-- ===== FAMOUS SINGER SECTION ===== -->
+<section class="fs-section" id="famous-singers">
+  <div class="container">
+
+    <div class="fs-heading-wrap">
+      <h2 class="fs-heading">
+      FAMOUS SINGERS  
+      </h2>
+    </div>
+
+    <!-- 1. Devji Thakor -->
+    <div class="fs-card">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Devji Thakor.jpeg' %}" alt="Devji Thakor">
+      </div>
+      <div class="fs-info">
+        <h2>Devji Thakor</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Devji Thakor</strong> — a powerhouse of rhythm, melody, and timeless devotion to music.
+          With a journey spanning over <strong>25+ years</strong>, Devji is a true master of both
+          <strong>Garba</strong> and <strong>Bollywood</strong> music. For the past <strong>2 years</strong>
+          he has enchanted international audiences in <strong>Hong Kong</strong>, while remaining an
+          integral part of the renowned <strong>Tahukar Beats</strong> back in <strong>Gujarat</strong>.
+        </p>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/iamdevjithakor/" target="_blank">@iamdevjithakor</a><br>
+          YouTube:&nbsp;<a href="https://www.youtube.com/@DevjiThakorOfficial" target="_blank">Devji Thakor Official</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Hetal Sadhu (reverse) -->
+    <div class="fs-card reverse">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Hetal Sadhu.jpeg' %}" alt="Hetal Sadhu">
+      </div>
+      <div class="fs-info">
+        <h2>Hetal Sadhu</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Hetal Sadhu</strong> — a renowned <strong>Gujarati folk singer</strong> from
+          <strong>Ahmedabad</strong>. Captivating audiences for over <strong>10+ years</strong>, she is a
+          key member of the <strong>Tahuko musical group</strong>. Her soulful voice and energetic
+          performances have earned her immense love across Gujarat and beyond.
+        </p>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/hetal_sadhu_official/" target="_blank">hetal_sadhu_official</a><br>
+          YouTube:&nbsp;<a href="https://www.youtube.com/@HetalSadhuOfficial" target="_blank">@HetalSadhuOfficial</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Nikky Mevada -->
+    <div class="fs-card">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Nikyy Mevada.jpeg' %}" alt="Nikky Mevada">
+      </div>
+      <div class="fs-info">
+        <h2>Nikky Mevada</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Nikky Mevada</strong> — grace, devotion, and musical brilliance in one voice. A shining
+          star for over <strong>15+ years</strong>, born <strong>25-03-1998</strong>. She mesmerizes
+          audiences with soulful <strong>Gujarati Garba</strong> and performs with
+          <strong>Nikky Beats, Visnagar</strong>, organized by
+          <a href="https://www.instagram.com/risumevada9/" target="_blank" style="color:#d4af37;"><strong>Bhavin Mevada</strong></a>.
+        </p>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/the_nikky_mevada_official/" target="_blank">the_nikky_mevada_official</a><br>
+          Instagram:&nbsp;<a href="https://www.instagram.com/the_nikky_mevada_live/" target="_blank">the_nikky_mevada_live</a><br>
+          YouTube:&nbsp;<a href="https://www.youtube.com/@nikkymevadaofficial6595" target="_blank">Nikky Mevada Official</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Sonu Charan (reverse) -->
+    <div class="fs-card reverse">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Sonu Charan.jpeg' %}" alt="Sonu Charan">
+      </div>
+      <div class="fs-info">
+        <h2>Sonu Charan</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Sonu Charan</strong> (real name <strong>Sonal Gadhvi</strong>) — a celebrated Gujarati
+          folk singer from <strong>Ahmedabad</strong>. Known for powerful Garba performances, she has been
+          in the singing profession for over <strong>15 years</strong> and commands over
+          <strong>2,03,000+ followers</strong> on Instagram.
+        </p>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/thesonucharan" target="_blank">thesonucharan</a><br>
+          YouTube:&nbsp;<a href="https://www.youtube.com/@sonucharan05" target="_blank">@sonucharan05</a><br>
+          Facebook:&nbsp;<a href="https://www.facebook.com/thesonucharan/" target="_blank">Sonu Charan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Smita Makwana -->
+    <div class="fs-card">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Smita Makwana.jpeg' %}" alt="Smita Makwana">
+      </div>
+      <div class="fs-info">
+        <h2>Smita Makwana</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Smita Makwana</strong> — a multifaceted personality from Gujarat renowned for her
+          significant contributions to the state's cultural landscape. A talented singer who has also
+          ventured into acting, she embodies the vibrant cultural spirit of Gujarat through her versatile
+          artistry and strong social media presence.
+        </p>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/smitamakwanaofficial/" target="_blank">smitamakwanaofficial</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Kishan Raval (reverse) -->
+    <div class="fs-card reverse">
+      <div class="fs-img-wrap">
+        <img src="{% static 'images/Kishan Raval.jpeg' %}" alt="Kishan Raval">
+      </div>
+      <div class="fs-info">
+        <h2>Kishan Raval</h2>
+        <div class="gold-rule"></div>
+        <p class="bio">
+          <strong>Kishan Raval</strong> — a renowned <strong>Gujarati Folk Singer</strong> from the
+          culturally rich village of <strong>Laghnaj</strong>. Captivating audiences for over
+          <strong>15+ years</strong>, his soulful voice and deep connection with the audience have
+          earned him immense love across Gujarat and beyond.
+        </p>
+        <p class="albums-title">Famous Albums</p>
+        <ul class="fs-albums">
+          <li><a href="https://www.youtube.com/watch?v=BbW-zsaxME4" target="_blank">✦ <strong>Megh Varse</strong> — 2022</a></li>
+          <li><a href="https://www.youtube.com/watch?v=aUiyjIDFLIw" target="_blank">✦ <strong>Tame Aavsho Ke Nai</strong> — 2020</a></li>
+          <li><a href="https://www.youtube.com/watch?v=Ux9q9onwQrQ" target="_blank">✦ <strong>Ek Taro Prem</strong> — 2021</a></li>
+        </ul>
+        <div class="fs-social">
+          Instagram:&nbsp;<a href="https://www.instagram.com/kishanravalmusic/reels/?hl=en" target="_blank">kishanravalmusic</a><br>
+          YouTube:&nbsp;<a href="https://www.youtube.com/channel/UCuW-HinNVLerWBKX4qNj86w" target="_blank">@Rockstarkishan</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section style="background: var(--dark-2); padding: 100px 60px; border-top: 1px solid rgba(212,175,55,0.1);">
+  <div class="section-header">
+    <span class="section-tag">✦ Simple Process ✦</span>
+    <h2 class="section-title">How It <span>Works</span></h2>
+    <div class="section-divider"></div>
+  </div>
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; max-width:1100px; margin:0 auto;">
+    {% for step in "123"|make_list %}
+    <div style="text-align:center; padding:40px 30px; border: 1px solid rgba(212,175,55,0.15); position:relative; transition: all 0.3s;"
+         onmouseenter="this.style.borderColor='rgba(212,175,55,0.5)'; this.style.boxShadow='0 0 30px rgba(212,175,55,0.1)'"
+         onmouseleave="this.style.borderColor='rgba(212,175,55,0.15)'; this.style.boxShadow='none'">
+      <div style="font-family:var(--font-display); font-size:52px; color:var(--gold); opacity:0.2; line-height:1; margin-bottom:20px;">{{ forloop.counter }}</div>
+      {% if forloop.counter == 1 %}
+        <div style="font-size:36px; margin-bottom:16px;">🎵</div>
+        <h3 style="font-family:var(--font-heading); font-size:18px; color:var(--white); margin-bottom:12px; letter-spacing:1px;">Browse Singers</h3>
+        <p style="color:var(--white-dim); font-style:italic;">Explore our curated collection of verified, talented artists across all genres</p>
+      {% elif forloop.counter == 2 %}
+        <div style="font-size:36px; margin-bottom:16px;">🔐</div>
+        <h3 style="font-family:var(--font-heading); font-size:18px; color:var(--white); margin-bottom:12px; letter-spacing:1px;">Login with Google</h3>
+        <p style="color:var(--white-dim); font-style:italic;">Quick one-click login using your Google account — no registration needed</p>
+      {% else %}
+        <div style="font-size:36px; margin-bottom:16px;">📅</div>
+        <h3 style="font-family:var(--font-heading); font-size:18px; color:var(--white); margin-bottom:12px; letter-spacing:1px;">Book & Celebrate</h3>
+        <p style="color:var(--white-dim); font-style:italic;">Submit your booking request and let us make your event extraordinary</p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- GENRES -->
+{% if genres %}
+<section class="section">
+  <div class="section-header">
+    <span class="section-tag">✦ By Genre ✦</span>
+    <h2 class="section-title">Explore by <span>Style</span></h2>
+    <div class="section-divider"></div>
+  </div>
+  <div style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center; max-width:900px; margin:0 auto;">
+    {% for genre in genres %}
+    <a href="{% url 'singer_list' %}?genre={{ genre.id }}"
+       style="font-family:var(--font-heading); font-size:12px; letter-spacing:2px; text-transform:uppercase; padding:12px 28px; border: 1px solid rgba(212,175,55,0.3); color:var(--white-dim); text-decoration:none; transition:all 0.3s;"
+       onmouseenter="this.style.borderColor='var(--gold)'; this.style.color='var(--gold)'; this.style.background='rgba(212,175,55,0.08)'"
+       onmouseleave="this.style.borderColor='rgba(212,175,55,0.3)'; this.style.color='var(--white-dim)'; this.style.background='transparent'">
+      {{ genre.name }}
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".mobile-slider .slide");
+    let current = 0;
+    setInterval(() => {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+    }, 5000);
+});
+</script>
+
+{% endblock %}

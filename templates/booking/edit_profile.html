@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div style="max-width:800px;margin:60px auto;padding:30px;background:#1a1a2e;border:1px solid gold;border-radius:10px;">
+
+    <h2 style="color:gold;text-align:center;margin-bottom:30px;">
+        Edit My Profile
+    </h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color:lightgreen;text-align:center;">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <button type="submit"
+            style="width:100%;padding:12px;background:gold;color:black;border:none;border-radius:5px;font-weight:bold;cursor:pointer;">
+            Save Changes
+        </button>
+
+    </form>
+
+    <div style="text-align:center;margin-top:20px;">
+        <a href="{% url 'singer_dashboard' %}"
+            style="color:gold;text-decoration:none;">
+            ← Back to Dashboard
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}
