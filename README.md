@@ -1,115 +1,149 @@
-# 🎵 Anantkala — Singer Management System
+# 🎤 ANANTKALA – Premium Singer Booking & Management Platform
 
-## VS Code ma Run Karva na Steps (Step by Step)
+![Django](https://img.shields.io/badge/Django-4.x-darkgreen?style=for-the-badge&logo=django)
+![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
+![SQLite](https://img.shields.io/badge/Database-SQLite-blue?style=for-the-badge)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?style=for-the-badge&logo=bootstrap)
+![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
 
-### Step 1: Terminal Open Karo
-VS Code ma `Ctrl + ` ` (backtick) press karo terminal open thase
+---
 
-### Step 2: Install Requirements
+## 📖 About the Project
+
+ANANTKALA is a premium Singer Booking & Management Platform developed using Django during my internship for a real client project.
+
+The platform enables users to discover talented singers, send booking requests, and manage bookings through a secure and responsive web application. Administrators can approve singers, manage bookings, and control website content from the admin dashboard.
+
+---
+
+## ✨ Features
+
+- 🎤 Singer Registration & Approval System
+- 📅 Online Singer Booking
+- 👤 Secure User Authentication
+- 🔐 Google OAuth Login
+- 🛠️ Admin Dashboard
+- 🖼️ Dynamic Gallery Management
+- 🌍 Multi-language Support (English & Gujarati)
+- 📱 Fully Responsive Design
+- 📩 Contact & Inquiry System
+- 📆 Booking Management
+- 🎵 Singer Profile Management
+
+---
+
+## 🛠 Tech Stack
+
+**Frontend**
+- HTML5
+- CSS3
+- Bootstrap
+- JavaScript
+
+**Backend**
+- Python
+- Django
+
+**Database**
+- SQLite
+
+**Authentication**
+- Django Authentication
+- Google OAuth
+
+---
+
+## 📂 Project Structure
+
+```
+anantkala/
+│── media/
+│── static/
+│── templates/
+│── singers/
+│── users/
+│── manage.py
+│── settings.py
+```
+
+---
+
+## 📸 Project Screenshots
+
+Create a folder named **screenshots** inside the repository and add your project images.
+
+Example:
+
+```
+screenshots/
+│── home.png
+│── singers.png
+│── booking.png
+│── gallery.png
+│── admin.png
+```
+
+Then display them like this:
+
+```md
+## Home Page
+
+![Home](screenshots/home.png)
+
+## Singer Listing
+
+![Singers](screenshots/singers.png)
+
+## Booking Page
+
+![Booking](screenshots/booking.png)
+
+## Admin Dashboard
+
+![Admin](screenshots/admin.png)
+```
+
+---
+
+## 🚀 Installation
+
 ```bash
+git clone https://github.com/Ayushi9350/Anantkala-Singer-Booking-Platform.git
+
+cd Anantkala-Singer-Booking-Platform
+
 pip install -r requirements.txt
-```
 
-### Step 3: Migrations Chalaavo
-```bash
-python manage.py makemigrations
 python manage.py migrate
-```
 
-### Step 4: Admin User Banavo
-```bash
-python manage.py createsuperuser
-```
-- Username, email, password nakhso
-
-### Step 5: Server Start Karo
-```bash
 python manage.py runserver
 ```
 
-### Website Open Karo:
-- **Home Page:** http://127.0.0.1:8000/
-- **Admin Panel:** http://127.0.0.1:8000/admin/
-- **Singers Page:** http://127.0.0.1:8000/singers/
-- **Login Page:** http://127.0.0.1:8000/accounts/login/
+---
+
+## 💡 Future Enhancements
+
+- Online Payment Gateway
+- Email Notifications
+- Calendar Booking
+- Advanced Search & Filters
+- User Reviews & Ratings
+- AI-Based Singer Recommendation
 
 ---
 
-## Google OAuth Setup (Google Login Mate)
+## 👩‍💻 Developed By
 
-1. https://console.cloud.google.com/ par jao
-2. New Project banavo — "Anantkala"
-3. APIs & Services → Credentials → Create OAuth 2.0 Client ID
-4. Authorized redirect URI: `http://127.0.0.1:8000/accounts/google/callback/`
-5. Client ID and Secret copy karo
-6. `settings.py` ma update karo:
-   ```python
-   'client_id': 'YOUR_GOOGLE_CLIENT_ID',  # paste karo
-   'secret': 'YOUR_GOOGLE_CLIENT_SECRET',  # paste karo
-   ```
-7. Admin panel → Sites → localhost:8000 → example.com ne badlo
+**Ayushi Mangroliya**
+
+Computer Engineering Student
+
+Python & Django Developer
+
+AI/ML Enthusiast
 
 ---
 
-## Admin Panel ma Singer Add Karvani Rite
-1. `/admin/` par jao
-2. Login karo (superuser credentials)
-3. **Genres** → Genre add karo (e.g. "Classical", "Bollywood")
-4. **Singers** → Singer add karo:
-   - Name, Photo, Bio, Genre
-   - Price, Experience
-   - Contact details
-   - Featured checkbox tick karo home page par avva mate
-5. Gallery images pan add thay singer detail ma
+## ⭐ If you like this project
 
----
-
-## Project Structure
-```
-anantkala/
-├── manage.py
-├── settings.py
-├── urls.py
-├── requirements.txt
-├── singers/          ← Singer app
-│   ├── models.py     ← Singer, Genre, Gallery models
-│   ├── views.py      ← Home, List, Detail, About, Contact
-│   ├── admin.py      ← Admin panel config
-│   └── urls.py
-├── booking/          ← Booking app  
-│   ├── models.py     ← Booking model
-│   ├── views.py      ← Book singer, My bookings
-│   ├── forms.py      ← Booking form
-│   └── urls.py
-├── templates/
-│   ├── base.html     ← Navbar + Footer
-│   ├── account/
-│   │   └── login.html ← Google login page
-│   ├── singers/
-│   │   ├── home.html
-│   │   ├── singer_list.html
-│   │   ├── singer_detail.html
-│   │   ├── about.html
-│   │   └── contact.html
-│   └── booking/
-│       ├── book_singer.html
-│       └── my_bookings.html
-├── static/
-│   └── css/
-│       └── style.css  ← Dark Golden Theme
-└── media/            ← Uploaded singer photos
-```
-
----
-
-## Features
-✅ Dark Golden Luxury Theme (Cinzel Decorative Font)
-✅ Google OAuth Login (No Registration needed)
-✅ Singer Listing with Genre Filter
-✅ Singer Detail with Gallery
-✅ Online Booking System
-✅ My Bookings Page
-✅ Full Admin Panel
-✅ Responsive Design
-✅ Featured Singers on Homepage
-✅ Animated scroll reveals
+Give this repository a ⭐ on GitHub.
