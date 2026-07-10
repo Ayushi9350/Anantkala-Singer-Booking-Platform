@@ -1,22 +1,22 @@
 # 🎤 ANANTKALA – Premium Singer Booking & Management Platform
 
-![Django](https://img.shields.io/badge/Django-4.x-darkgreen?style=for-the-badge&logo=django)
+![Django](https://img.shields.io/badge/Django-4.x-success?style=for-the-badge&logo=django)
 ![Python](https://img.shields.io/badge/Python-3.x-blue?style=for-the-badge&logo=python)
-![SQLite](https://img.shields.io/badge/Database-SQLite-blue?style=for-the-badge)
+![SQLite](https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite)
 ![Bootstrap](https://img.shields.io/badge/Bootstrap-5-purple?style=for-the-badge&logo=bootstrap)
-![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=for-the-badge)
 
 ---
 
-## 📖 About the Project
+# 📖 About the Project
 
-ANANTKALA is a premium Singer Booking & Management Platform developed using Django during my internship for a real client project.
+**ANANTKALA** is a premium **Singer Booking & Management Platform** developed using **Django** during my internship for a **real client project**.
 
-The platform enables users to discover talented singers, send booking requests, and manage bookings through a secure and responsive web application. Administrators can approve singers, manage bookings, and control website content from the admin dashboard.
+The platform enables users to discover talented singers, send booking requests, and manage bookings through a secure and responsive web application. Administrators can approve singers, manage bookings, manage gallery content, and control the complete platform through an intuitive admin dashboard.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
 - 🎤 Singer Registration & Approval System
 - 📅 Online Singer Booking
@@ -32,80 +32,94 @@ The platform enables users to discover talented singers, send booking requests, 
 
 ---
 
-## 🛠 Tech Stack
+# 🛠 Tech Stack
 
-**Frontend**
+### Frontend
+
 - HTML5
 - CSS3
-- Bootstrap
+- Bootstrap 5
 - JavaScript
 
-**Backend**
+### Backend
+
 - Python
 - Django
 
-**Database**
+### Database
+
 - SQLite
 
-**Authentication**
+### Authentication
+
 - Django Authentication
 - Google OAuth
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
-```
+```text
 anantkala/
+│── booking/
 │── media/
+│── screenshots/
+│── singers/
 │── static/
 │── templates/
-│── singers/
-│── users/
 │── manage.py
 │── settings.py
+│── urls.py
+│── requirements.txt
 ```
 
 ---
 
-## 📸 Project Screenshots
+# 📸 Project Screenshots
 
-Create a folder named **screenshots** inside the repository and add your project images.
-
-Example:
-
-```
-screenshots/
-│── home.png
-│── singer.png
-│── booking.png
-│── gallery.png
-│── admin.png
-```
-
-Then display them like this:
-
-```md
-## Home Page
+## 🏠 Home Page
 
 ![Home](screenshots/home.png)
 
-## Singer Listing
+---
 
-![Singers](screenshots/singer.png)
+## 🎤 Singer Listing
 
-## Booking Page
-
-![Booking](screenshots/booking.png)
-
-## Admin Dashboard
-
-![Admin](screenshots/admin.png)
-```
+![Singer](screenshots/singer.png)
 
 ---
 
-## 🚀 Installation
+## 📅 Booking Page
+
+![Booking](screenshots/booking.png)
+
+---
+
+## 🎟️ My Bookings
+
+![My Bookings](screenshots/my-booking.png)
+
+---
+
+## 🖼️ Gallery
+
+![Gallery](screenshots/gallery.png)
+
+---
+
+## 📞 Contact Us
+
+![Contact Us](screenshots/contact%20us.png)
+
+---
+
+## ⚙️ Admin Dashboard
+
+![Admin](screenshots/admin.png)
+
+---
+
+# 🚀 Installation
 
 ```bash
 git clone https://github.com/Ayushi9350/Anantkala-Singer-Booking-Platform.git
@@ -121,29 +135,27 @@ python manage.py runserver
 
 ---
 
-## 💡 Future Enhancements
+# 💡 Future Enhancements
 
-- Online Payment Gateway
-- Email Notifications
-- Calendar Booking
-- Advanced Search & Filters
-- User Reviews & Ratings
-- AI-Based Singer Recommendation
+- 💳 Online Payment Gateway
+- 📧 Email Notifications
+- 📅 Calendar Booking
+- 🔍 Advanced Search & Filters
+- ⭐ User Reviews & Ratings
+- 🤖 AI-Based Singer Recommendation
 
 ---
 
-## 👩‍💻 Developed By
+# 👩‍💻 Developed By
 
 **Ayushi Mangroliya**
 
-Computer Engineering Student
-
-Python & Django Developer
-
-AI/ML Enthusiast
+- Computer Engineering Student
+- Python & Django Developer
+- AI/ML Enthusiast
 
 ---
 
-## ⭐ If you like this project
+# ⭐ Support
 
-Give this repository a ⭐ on GitHub.
+If you found this project useful, don't forget to ⭐ **Star this repository**.
