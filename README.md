@@ -92,7 +92,7 @@ Then display them like this:
 
 ## Singer Listing
 
-![Singers](screenshots/singers.png)
+![Singers](screenshots/singer.png)
 
 ## Booking Page
 
