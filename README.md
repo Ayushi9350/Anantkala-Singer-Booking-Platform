@@ -77,7 +77,7 @@ Example:
 ```
 screenshots/
 │── home.png
-│── singers.png
+│── singer.png
 │── booking.png
 │── gallery.png
 │── admin.png
